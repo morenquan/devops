@@ -1,7 +1,6 @@
 """
 基于 ansible v2.8.5 的 api，低于 v2.8 不适用
 """
-import traceback
 import os
 import sys
 import time
@@ -21,18 +20,18 @@ def gen_rand_char(length=16, chars='0123456789zyxwvutsrqponmlkjihgfedcbaZYXWVUTS
     return ''.join(random.sample(chars, length))
 
 
-def convert_byte(byte):
+def convert_byte(byte, digits=2):
     byte = int(byte)
     if byte <= 1024:
         return '{} B'.format(byte)
     elif 1024 < byte <= 1048576:
-        return '{} KB'.format('%.2f' % (byte / 1024))
+        return '{} KB'.format('%.{0}f'.format(digits) % (byte / 1024))
     elif 1048576 < byte <= 1073741824:
-        return '{} MB'.format('%.2f' % (byte / 1024 / 1024))
+        return '{} MB'.format('%.{0}f'.format(digits) % (byte / 1024 / 1024))
     elif 1073741824 < byte <= 1099511627776:
-        return '{} GB'.format('%.2f' % (byte / 1024 / 1024 / 1024))
+        return '{} GB'.format('%.{0}f'.format(digits) % (byte / 1024 / 1024 / 1024))
     elif byte > 1099511627776:
-        return '{} TB'.format('%.2f' % (byte / 1024 / 1024 / 1024 / 1024))
+        return '{} TB'.format('%.{0}f'.format(digits) % (byte / 1024 / 1024 / 1024 / 1024))
 
 
 def save_res(res_file, res):
@@ -822,8 +821,8 @@ class PlayBookCallbackModule(CallbackBase):
             save_res(self.res_file, tmp)
 
     def v2_playbook_on_no_hosts_matched(self):
-        data = '<code style="color: #FF0000">没有匹配到主机，请确保 playbook 中 hosts 值为: all</code>'
-        data2 = '\033[01;31m没有匹配到主机，请确保 playbook 中 hosts 值为: all\r\n\r\n\033[0m'
+        data = '<code style="color: #FF0000">没有匹配到主机，请确保 playbook 中 hosts 设置正确的值</code>'
+        data2 = '\033[01;31m没有匹配到主机，请确保 playbook 中 hosts 设置正确的值\r\n\r\n\033[0m'
         delay = round(time.time() - self.start_time, 6)
         self.res.append(json.dumps([delay, 'o', data2]))
         self.message['status'] = 0

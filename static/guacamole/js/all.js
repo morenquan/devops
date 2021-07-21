@@ -1171,7 +1171,22 @@ Guacamole.Client = function(h) {
 				$("body").removeAttr("onbeforeunload"); //删除刷新关闭提示属性
 			} else {
 				toastr.info(data);
-			};
+			}
+		},
+		group: function(Q) {	// 自定义处理协议，连接成功后设置 group 信息，用于页面上传文件到 guacd 挂载是目录
+			var lable = Q[0];
+			var data = Q[1];
+			$("#" + lable).attr("text", data);
+		},
+		display: function(Q) {	// 自定义处理协议
+			toastr.options.closeButton = false;
+			toastr.options.showMethod = 'slideDown';
+			toastr.options.hideMethod = 'fadeOut';
+			toastr.options.closeMethod = 'fadeOut';
+			toastr.options.timeOut = 5000;
+			toastr.options.extendedTimeOut = 3000;
+			toastr.options.positionClass = 'toast-bottom-center';
+			toastr.info('分辨率: ' + Q[0] + ' x ' + Q[1] + ', DPI: ' + Q[2]);
 		},
 	};
 	h.oninstruction = function(P, O) {

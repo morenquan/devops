@@ -60,7 +60,7 @@ class User(models.Model):
         'clissh': [
             {
                 'name': 'securecrt',
-                'path': 'C:\\Program Files\\VanDyke Software\\Clients\\SecureCRT.exe',
+                'path': 'C:\\Program Files (x86)\\VanDyke Software\\Clients\\SecureCRT.exe',
                 'args': '/T /N "{username}@{host}-{hostname}" /SSH2 /L {login_user} /PASSWORD {login_passwd} {login_host} /P {port}',
                 'enable': True
             },
@@ -72,7 +72,7 @@ class User(models.Model):
             },
             {
                 'name': 'putty',
-                'path': 'C:\\Users\\xx\\AppData\\Roaming\\TP4A\\Teleport-Assist\\tools\\putty\\putty.exe',
+                'path': 'C:\\Program Files (x86)\\putty\\putty.exe',
                 'args': '-l {login_user} -pw {login_passwd} {login_host} -P {port}',
                 'enable': False
             },
@@ -86,7 +86,7 @@ class User(models.Model):
         'clisftp': [
             {
                 'name': 'winscp',
-                'path': 'C:\\Program Files\\winscp\\WinSCP.exe',
+                'path': 'C:\\Program Files (x86)\\winscp\\WinSCP.exe',
                 'args': '/sessionname="{username}@{host}-{hostname}" {login_user}:{login_passwd}@{login_host}:{port}',
                 'enable': True
             },
@@ -153,6 +153,7 @@ class LoginLog(models.Model):
         (21, '添加主机组'),
         (22, '删除主机组'),
         (23, '更新主机组'),
+        (24, '自动添加调度主机'),
     )
     # 当用户被删除后，相关的登陆日志user字段设置为NULL
     # user = models.ForeignKey('User', blank=True, null=True, on_delete=models.PROTECT, verbose_name='用户')

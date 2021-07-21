@@ -18,10 +18,13 @@ from django.urls import path, include, re_path
 from server.views import index
 from django.conf import settings
 from django.conf.urls.static import static
+# import debug_toolbar
 
 urlpatterns = [
 
     # path('admin/', admin.site.urls),
+
+    # path('__debug__/', include(debug_toolbar.urls)),
     
     path('', index),
     
@@ -37,9 +40,13 @@ urlpatterns = [
     path('webtelnet/', include('webtelnet.urls', namespace='webtelnet')),
 
     path('webguacamole/', include('webguacamole.urls', namespace='webguacamole')),
+    path('api/webguacamole/', include('webguacamole.urls_api', namespace='webguacamole_api')),
 
     path('batch/', include('batch.urls', namespace='batch')),
     path('api/batch/', include('batch.urls_api', namespace='batch_api')),
+
+    path('scheduler/', include('scheduler.urls', namespace='scheduler')),
+    path('api/scheduler/', include('scheduler.urls_api', namespace='scheduler_api')),
 
 ]
 
