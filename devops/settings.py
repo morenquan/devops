@@ -183,11 +183,11 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.mysql',
         'ENGINE': 'db_pool.mysql',     # 重写 mysql 连接库实现连接池
-        'NAME': 'devops',
+        'NAME': 'admin',
         'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': '192.168.223.111',
-        'PORT': '3306',
+        'PASSWORD': 'admin',
+        'HOST': '192.168.72.101',
+        'PORT': '3307',
         # 'CONN_MAX_AGE': 600,    # 如果使用 db_pool.mysql 绝对不能设置此参数，否则会造成使用连接后不会快速释放到连接池，从而造成连接池阻塞
         # 数据库连接池大小，mysql 总连接数大小为：连接池大小 * 服务进程数
         'DB_POOL_SIZE': 3,     # 默认 5 个
